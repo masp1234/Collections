@@ -32,23 +32,24 @@ public class wordCountFromWebSite {
 
     public static List<String> getWordsFromWebSite() throws IOException {
         URL dr = new URL("https://dr.dk/");
-        BufferedReader in = new BufferedReader(
-            new InputStreamReader(dr.openStream()));
+        BufferedReader in = new BufferedReader(new InputStreamReader(dr.openStream()));
         List<String> words = new LinkedList<>();
 
         String inputLine = "";
+        // læser linjer fra URL og gemmer dem alle i inputLine
         while (in.ready()) {
             String word = in.readLine();
             inputLine += word;
         }
+        //læser inputLine og ignorerer alt andet end små og store bogstaver
         Scanner reader = new Scanner(inputLine);
         reader.useDelimiter("[^a-zA-Z]+");
 
+        //gemmer ordene i words-listen
         while (reader.hasNext()) {
             String word = reader.next();
             words.add(word.toLowerCase());
         }
-        //System.out.println(words);
         return words;
     }
 
